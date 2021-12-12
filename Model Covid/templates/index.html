@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+            rel="stylesheet"
+        />
+        <title>Aplikasi Diagnosis COVID-19</title>
+    </head>
+    <body
+        class="
+            flex flex-col
+            justify-between
+            item-center
+            p-8
+            min-h-screen
+            bg-gradient-to-r
+            from-purple-300
+            to-blue-400
+            text-gray-800
+            md:flex-row
+        "
+    >
+        <main class="bg-white p-16 rounded-lg">
+            <h1 class="text-3xl font-bold mb-8">
+                Prediksi Diagnosis COVID-19:
+            </h1>
+
+            <form
+                action="{{ url_for('predict') }}"
+                method="post"
+                class="flex flex-col"
+            >
+                <label for="cough" class="mt-4 mb-2"
+                    >Batuk:</label
+                >
+                <select
+                    name="cough"
+                    id="cough"
+                    class="p-4 bg-gray-100 rounded-md"
+                >
+                    <option value="Tidak">Tidak</option>
+                    <option value="Ya">Ya</option>
+                </select>
+
+                <label for="fever" class="mt-4 mb-2"
+                    >Demam:</label
+                >
+                <select
+                    name="fever"
+                    id="fever"
+                    class="p-4 bg-gray-100 rounded-md"
+                >
+                    <option value="Tidak">Tidak</option>
+                    <option value="Ya">Ya</option>
+                </select>
+
+                <label for="sore" class="mt-4 mb-2"
+                    >Sakit tenggorokan:</label
+                >
+                <select
+                    name="sore"
+                    id="sore"
+                    class="p-4 bg-gray-100 rounded-md"
+                >
+                    <option value="Tidak">Tidak</option>
+                    <option value="Ya">Ya</option>
+                </select>
+
+                <label for="breath" class="mt-4 mb-2"
+                    >Kesulitan bernafas:</label
+                >
+                <select
+                    name="breath"
+                    id="breath"
+                    class="p-4 bg-gray-100 rounded-md"
+                >
+                    <option value="Tidak">Tidak</option>
+                    <option value="Ya">Ya</option>
+                </select>
+
+                <label for="head" class="mt-4 mb-2"
+                    >Sakit kepala:</label
+                >
+                <select
+                    name="head"
+                    id="head"
+                    class="p-4 bg-gray-100 rounded-md"
+                >
+                    <option value="Tidak">Tidak</option>
+                    <option value="Ya">Ya</option>
+                </select>
+
+                <label for="age" class="mt-4 mb-2"
+                    >Usia diatas 60 tahun:</label
+                >
+                <select
+                    name="age"
+                    id="age"
+                    class="p-4 bg-gray-100 rounded-md"
+                >
+                    <option value="Tidak">Tidak</option>
+                    <option value="Ya">Ya</option>
+                </select>
+
+                <label for="gender" class="mt-4 mb-2"
+                    >Jenis Kelamin:</label
+                >
+                <select
+                    name="gender"
+                    id="gender"
+                    class="p-4 bg-gray-100 rounded-md"
+                >
+                    <option value="Laki-laki">Laki-laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                </select>
+                
+                <label for="indication" class="mt-4 mb-2"
+                    >Indikasi:</label
+                >
+                <select
+                    name="indication"
+                    id="indication"
+                    class="p-4 bg-gray-100 rounded-md"
+                >
+                    <option value="Tidak ada">Tidak ada</option>
+                    <option value="Dari luar negeri">Dari luar negeri</option>
+                    <option value="Kontak dengan seseorang yang terkonfirmasi positif COVID-19">Kontak dengan seseorang yang terkonfirmasi positif COVID-19</option>
+                </select>
+
+                <button
+                    type="submit"
+                    class="
+                        flex
+                        justify-center
+                        align-center
+                        mt-8
+                        p-4
+                        bg-gradient-to-r
+                        from-green-400
+                        to-blue-500
+                        text-white
+                        rounded-md
+                    "
+                >
+                    PREDIKSI SEKARANG
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="feather feather-arrow-right ml-4"
+                    >
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </form>
+        </main>
+        <section class="mt-8 h-full flex-auto rounded-lg md:mt-0 md:ml-8">
+            <div class="bg-white p-16 rounded-lg">
+                <h1 class="text-2xl mb-8">
+                    Prediksi Diagnosis COVID-19 Anda adalah:
+                </h1>
+                <h2 class="flex justify-center text-5xl font-bold">{{ prediction }}</h2>
+                <div class="mt-8">
+                    <p>Batuk             : {{ cough }}</p>
+                    <p>Demam             : {{ fever }}</p>
+                    <p>Sakit tenggorokan : {{ sore }}</p>
+                    <p>Kesulitan bernafas: {{ breath }}</p>
+                    <p>Sakit kepala      : {{ head }}</p>
+                    <p>Usia              : {{ age }}</p>
+                    <p>Jenis kelamin     : {{ gender }}</p>
+                    <p>Indikasi          : {{ indication }}</p>
+                    <p class="text-gray-600 float-right">by Rakintsev Velshan Thani</p>
+                </div>
+            </div>
+            <div class="bg-white p-16 rounded-lg mt-8">
+                <img
+                    src="https://covid19.go.id/storage/app/uploads/public/5ff/3f1/ba2/5ff3f1ba22548452943220.png"
+                />
+            </div>
+            <div>
+            </div>
+        </section>
+    </body>
+</html>
