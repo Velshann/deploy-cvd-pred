@@ -172,6 +172,7 @@
                 </h1>
                 <h2 class="flex justify-center text-5xl font-bold">{{ prediction }}</h2>
                 <div class="mt-8">
+                    {% if (prediction) != "" %}
                     <p>Batuk             : {{ cough }}</p>
                     <p>Demam             : {{ fever }}</p>
                     <p>Sakit tenggorokan : {{ sore }}</p>
@@ -180,6 +181,7 @@
                     <p>Usia              : {{ age }}</p>
                     <p>Jenis kelamin     : {{ gender }}</p>
                     <p>Indikasi          : {{ indication }}</p>
+                    {% endif %}
                     <p class="text-gray-600 float-right">by Rakintsev Velshan Thani</p>
                 </div>
             </div>

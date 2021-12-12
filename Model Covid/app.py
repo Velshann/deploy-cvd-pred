@@ -6,11 +6,11 @@ app = Flask(__name__)
 model_file = open('model.pkl', 'rb')
 model = pickle.load(model_file, encoding='bytes')
 
-@app.route('/')
+@app.route('/', methods=['POST'])
 def index():
-  return render_template('index.html', insurance_cost=0)
+  return render_template('index.html', prediction="")
 
-@app.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['get', 'POST'])
 def predict(): 
   cough, fever, sore, breath, head, age, gender, indication = [x for x in request.form.values()]
   data = []
